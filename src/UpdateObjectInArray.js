@@ -5,16 +5,17 @@
  * @returns {object[]} new transformed version of arrayOfObjects
  */
 function updateObjectInArray(soughtId, operationFN, arrayOfObjects) {
-  const newArrayOfObjects = [];
-  for (let object of arrayOfObjects) {
-    let newObject = { ...object };
-    if (soughtId === newObject.id) {
-      operationFN(newObject)
+  return arrayOfObjects.map((object) =>
+    {
+      if (soughtId === object.id) {
+        let newObject = { ...object };
+        operationFN(newObject);
+        return { ...newObject };
+      } else {
+        return { ...object };
+      }
     }
-    newArrayOfObjects.push(newObject);
-  }
-
-  return newArrayOfObjects;
+  );
 }
 
 export { updateObjectInArray };
