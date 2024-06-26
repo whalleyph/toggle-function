@@ -6,15 +6,13 @@
  */
 function updateObjectInArray(soughtId, operationFN, arrayOfObjects) {
   return arrayOfObjects.map((object) =>
-    {
-      if (soughtId === object.id) {
-        let newObject = { ...object };
-        operationFN(newObject);
-        return { ...newObject };
-      } else {
-        return { ...object };
-      }
-    }
+    soughtId === object.id
+      ? (() => {
+          let newObject = { ...object };
+          operationFN(newObject);
+          return newObject;
+        })()
+      : { ...object }
   );
 }
 
